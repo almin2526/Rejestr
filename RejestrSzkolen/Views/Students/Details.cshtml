@@ -1,0 +1,72 @@
+﻿@model RejestrSzkolen.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataRejestracji)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataRejestracji)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zapisy)
+        </dt>
+        <dd>
+            <table class="table ">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Kurs.Tytul)</th>
+                    <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Ocena)</th>
+                </tr>
+                @foreach (var item in Model.Zapisy)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem =>item.Kurs.Tytul)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ocena)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
