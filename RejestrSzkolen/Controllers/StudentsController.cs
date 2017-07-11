@@ -16,10 +16,14 @@ namespace RejestrSzkolen.Controllers
         private RejestrContext db = new RejestrContext();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Studenci.ToList());
+            var rep = new RejestrRepository();
+            var vm = rep.GetStudentsIndexVM(sortOrder, currentFilter, searchString, page);
+            return View(vm);
         }
+
+      
 
         // GET: Students/Details/5
         public ActionResult Details(int? id)
@@ -145,7 +149,7 @@ namespace RejestrSzkolen.Controllers
                     saveChangesError = true
                 });
             }
-            
+
             return RedirectToAction("Index");
         }
 

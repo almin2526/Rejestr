@@ -1,51 +1,70 @@
-﻿@model IEnumerable<RejestrSzkolen.Models.Student>
-
+﻿@model RejestrSzkolen.ViewModels.IndexVM
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Uczestnicy zajęć</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj", "Create", null, new { @class = "btn btn-default" })
 </p>
+
+<div class="form-inline">
+    @using (Html.BeginForm("Index", "Students", FormMethod.Get))
+    {
+        @Html.TextBox("SearchString",Model.CurrentFilter, new { @class = "form-control", @placeholder = "Szukaj..." })
+        <input type="submit" value="Szukaj" class="btn btn-default" />
+    }
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            @Html.ActionLink("Nazwisko", "Index", new { sortOrder = Model.NameSortParm, currentFilter = Model.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Imie)
+            Imię
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DataRejestracji)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.ActionLink("Data rejestracji", "Index", new { sortOrder = Model.DateSortParm, currentFilter = Model.CurrentFilter })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nazwisko)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Imie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataRejestracji)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Lista)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRejestracji)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edycja", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+Strona @(Model.Lista.PageCount < Model.Lista.PageNumber ? 0 : Model.Lista.PageNumber) z
+@Model.Lista.PageCount
+
+@Html.PagedListPager(Model.Lista, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = Model.CurrentSort,
+        currentFilter =Model.CurrentFilter
+    }))
+ 
