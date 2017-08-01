@@ -11,7 +11,8 @@ namespace RejestrSzkolen.DAL
     {
         public RejestrConfiguration()
         {
-            DbInterception.Add(new InterceptorLogging());
+            //DbInterception.Add(new InterceptorLogging());
+            DbInterception.Add(new NLogCommandInterceptor());
         }
     }
 }

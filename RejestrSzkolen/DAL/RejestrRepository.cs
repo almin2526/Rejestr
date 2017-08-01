@@ -12,6 +12,7 @@ namespace RejestrSzkolen.DAL
         {
             using (var db = new RejestrContext())
             {
+                db.Database.Log = Console.Write;
                 var students = db.Studenci.AsQueryable();
                 if (!String.IsNullOrEmpty(searchString))
                 {
