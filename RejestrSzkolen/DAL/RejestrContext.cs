@@ -24,5 +24,6 @@ namespace RejestrSzkolen.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
+        public System.Data.Entity.DbSet<RejestrSzkolen.Models.Lokalizacja> Lokalizacje { get; set; }
     }
 }

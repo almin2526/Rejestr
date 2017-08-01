@@ -1,0 +1,42 @@
+﻿@model RejestrSzkolen.Models.Kurs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kurs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jednostka.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jednostka.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punkty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punkty)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KursID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

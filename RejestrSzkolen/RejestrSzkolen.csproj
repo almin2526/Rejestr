@@ -198,7 +198,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DydaktykController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KursController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="DAL\InterceptorLogging.cs" />
@@ -236,6 +238,10 @@
     <Compile Include="Migrations\201708011447113_lokalizacjacd.Designer.cs">
       <DependentUpon>201708011447113_lokalizacjacd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708011607504_ocena.cs" />
+    <Compile Include="Migrations\201708011607504_ocena.Designer.cs">
+      <DependentUpon>201708011607504_ocena.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dydaktyk.cs" />
@@ -248,6 +254,7 @@
     <Compile Include="Models\Zapis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\DydaktykVM.cs" />
     <Compile Include="ViewModels\IndexVM.cs" />
     <Compile Include="ViewModels\Statystyki2VM.cs" />
     <Compile Include="ViewModels\StatystykiVM.cs" />
@@ -316,6 +323,21 @@
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Home\Stat.cshtml" />
+    <Content Include="Views\Kurs\Create.cshtml" />
+    <Content Include="Views\Kurs\Delete.cshtml" />
+    <Content Include="Views\Kurs\Details.cshtml" />
+    <Content Include="Views\Kurs\Edit.cshtml" />
+    <Content Include="Views\Kurs\Index.cshtml" />
+    <Content Include="Views\Dydaktyks\Create.cshtml" />
+    <Content Include="Views\Dydaktyks\Delete.cshtml" />
+    <Content Include="Views\Dydaktyks\Details.cshtml" />
+    <Content Include="Views\Dydaktyks\Edit.cshtml" />
+    <Content Include="Views\Dydaktyks\Index.cshtml" />
+    <Content Include="Views\Dydaktyk\Create.cshtml" />
+    <Content Include="Views\Dydaktyk\Delete.cshtml" />
+    <Content Include="Views\Dydaktyk\Details.cshtml" />
+    <Content Include="Views\Dydaktyk\Edit.cshtml" />
+    <Content Include="Views\Dydaktyk\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708011447113_lokalizacjacd.resx">
       <DependentUpon>201708011447113_lokalizacjacd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708011607504_ocena.resx">
+      <DependentUpon>201708011607504_ocena.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

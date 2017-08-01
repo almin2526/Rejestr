@@ -1,0 +1,66 @@
+﻿@model RejestrSzkolen.ViewModels.DydaktykVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Dydaktycy.Single().LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dydaktycy.Single().Imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dydaktycy.Single().HireDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dydaktycy.Single().Lokalizacja.Miejsce)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Dydaktycy) {
+    string selectedcss ="";
+    if(item.ID==Model.DydaktykID)
+    {
+        selectedcss = "success";
+    }
+
+
+    <tr class="@selectedcss">
+
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HireDate)
+        </td>
+
+        <td>
+            @if (item.Lokalizacja!=null)
+            {
+                @Html.DisplayFor(modelItem => item.Lokalizacja.Miejsce)
+            }
+            
+        </td>
+        <td>
+            @Html.ActionLink("Wybierz", "Index", new { id = item.ID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
