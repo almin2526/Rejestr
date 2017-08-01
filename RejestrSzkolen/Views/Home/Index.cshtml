@@ -3,12 +3,24 @@
 }
 <div class="jumbotron">
     <h1>Rejestr szkoleń</h1>
+
 </div>
 <div class="row">
     <div class="col-md-4">
         <h2>Rejestr Szkoleń</h2>
         <p>
-           Rejestr szkoleń to program do rejestracji szkoleń.
+            Rejestr szkoleń to program do rejestracji szkoleń.
+
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>
+            Statystyki
+        </h2>
+        <p>
+            @Html.Action("Stat")
+            @Html.Action("About")
+            
         </p>
     </div>
     <div class="col-md-4">
@@ -17,8 +29,8 @@
             Tu możesz dodać szkolenie do bazy danych.
         </p>
         <p>
-            
+
         </p>
     </div>
-    
+  
 </div>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RejestrSzkolen.ViewModels;
+using RejestrSzkolen.DAL;
 
 namespace RejestrSzkolen.Controllers
 {
@@ -13,11 +15,26 @@ namespace RejestrSzkolen.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+        public ActionResult About()
+        {           
+            using (var db = new RejestrContext())
+            {
+                var vm = from s in db.Studenci
+                         group s by s.DataRejestracji into grupa
+                         select new ViewModels.StatystykiVM { DataRejestracji = grupa.Key, LiczbaStudentow = grupa.Count() };
+                return View(vm.ToList());
+            }            
+        }
+        public ActionResult Stat()
+        {
+            using (var db = new RejestrContext())
+            {
+                var vm = from s in db.Studenci
+                         group s by s.Imie into grupa
+                         select new ViewModels.Statystyki2VM { Imie = grupa.Key, LiczbaStudentow = grupa.Count() };
+                return View(vm.ToList());
+            }
         }
 
         public ActionResult Contact()

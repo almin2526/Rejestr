@@ -1,7 +1,24 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model IEnumerable<RejestrSzkolen.ViewModels.StatystykiVM>
 
-<p>Use this area to provide additional information.</p>
+@{
+    Layout=null;
+}
+
+<div class="panel panel-default" >
+    <div class="panel panel-heading">Wg. daty rejestracji</div>
+    
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    @Html.DisplayFor(modelItem => item.DataRejestracji)
+                    <span class="badge">
+                        @item.LiczbaStudentow
+                    </span>
+                </li>
+            }
+        </ul>
+    
+
+</div>
