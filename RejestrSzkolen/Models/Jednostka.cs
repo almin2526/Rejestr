@@ -16,11 +16,6 @@ namespace RejestrSzkolen.Models
         [Column(TypeName = "money")]
         public decimal Budget { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
-        [Display(Name = "Start")]
-        public DateTime StartDate { get; set; }
-
         public int? DydaktykID { get; set; }
 
         public virtual Dydaktyk Administrator { get; set; }

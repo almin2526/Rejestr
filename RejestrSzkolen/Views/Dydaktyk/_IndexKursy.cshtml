@@ -1,0 +1,43 @@
+﻿@model RejestrSzkolen.ViewModels.DydaktykVM
+ 
+@if (Model.Kursy != null)
+{
+    <h3>Kursy dydaktyka</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Numer</th>
+            <th>Tytuł</th>
+            <th>Jednostka</th>
+        </tr>
+
+        @foreach (var item in Model.Kursy)
+        {
+            string selectedRow = "";
+            if (item.KursID == Model.KursID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+              
+                <td>
+                    @item.KursID
+                </td>
+                <td>
+                    @item.Tytul
+                </td>
+                <td>
+                    @if (item.Jednostka != null)
+                    {
+                        @item.Jednostka.Nazwa
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Wybierz", "Index", new { kursId = item.KursID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}

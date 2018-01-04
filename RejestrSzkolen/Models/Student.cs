@@ -7,15 +7,9 @@ using System.Web;
 
 namespace RejestrSzkolen.Models
 {
-    public class Student
+    public class Student:Osoba
     {
-        public int ID { get; set; }
-        [StringLength(50, ErrorMessage = "Nazwisko nie może mieć więcej niż 50 znaków", MinimumLength = 1)]
-        [Required]
-        public string Nazwisko { get; set; }
-        [Display(Name = "Imię"), StringLength(50, ErrorMessage = "Imię nie może mieć więcej niż 50 znaków")]
-        [Required]
-        public string Imie { get; set; }
+       
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data rejestracji", Prompt = "Podaj datę rejestracji", Description = "Data rejestracji studenta")]

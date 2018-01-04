@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RejestrSzkolen.DAL;
 using RejestrSzkolen.Models;
+using RejestrSzkolen.ViewModels;
 
 namespace RejestrSzkolen.Controllers
 {
@@ -25,7 +27,7 @@ namespace RejestrSzkolen.Controllers
             vm.Dydaktycy = db.Dydaktycy
             .Include(d => d.Lokalizacja)
             .Include(d => d.Kursy.Select(k => k.Jednostka))
-            .OrderBy(n => n.LastName);
+            .OrderBy(n => n.Nazwisko);
 
 
             if(id!=null)
@@ -52,7 +54,7 @@ namespace RejestrSzkolen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dydaktyk dydaktyk = db.Dydaktycy.Find(id);
+            Dydaktyk dydaktyk = db.Dydaktycy.Include(d => d.Lokalizacja).FirstOrDefault(d => d.ID == id);
             if (dydaktyk == null)
             {
                 return HttpNotFound();
@@ -72,10 +74,16 @@ namespace RejestrSzkolen.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,Imie,HireDate")] Dydaktyk dydaktyk)
+        public ActionResult Create([Bind(Include = "ID,Nazwisko,Imie,DataZatrudnienia,Lokalizacja")] Dydaktyk dydaktyk)
         {
             if (ModelState.IsValid)
             {
+                dydaktyk.Lokalizacja.DydaktykID = dydaktyk.ID;
+                if (!String.IsNullOrEmpty(dydaktyk.Lokalizacja.Miejsce))
+                {
+                    db.Lokalizacje.Add(dydaktyk.Lokalizacja);
+                }
+                
                 db.Dydaktycy.Add(dydaktyk);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,7 +100,8 @@ namespace RejestrSzkolen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dydaktyk dydaktyk = db.Dydaktycy.Find(id);
+            Dydaktyk dydaktyk = db.Dydaktycy.Include(d=>d.Lokalizacja).Include(d=>d.Kursy).FirstOrDefault(d=>d.ID==id);
+            WpiszPrzydzieloneDaneKursu(dydaktyk);
             if (dydaktyk == null)
             {
                 return HttpNotFound();
@@ -101,21 +110,70 @@ namespace RejestrSzkolen.Controllers
             return View(dydaktyk);
         }
 
+        private void WpiszPrzydzieloneDaneKursu(Dydaktyk dydaktyk)
+        {
+            var wszystkieKursy = db.Kursy;
+            var kursyDydaktyka = new HashSet<int>(dydaktyk.Kursy.Select(k => k.KursID));
+            var viewModel = new List<PrzydzieloneDaneKursuVM>();
+            foreach (var kurs in wszystkieKursy)
+            {
+                viewModel.Add(new PrzydzieloneDaneKursuVM
+                {
+                    KursID = kurs.KursID,
+                    Tytuł = kurs.Tytul,
+                    Przypisany = kursyDydaktyka.Contains(kurs.KursID)
+                });
+                ViewBag.Kursy = viewModel;
+            }
+        }
+
+
+
         // POST: Dydaktyk/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,Imie,HireDate")] Dydaktyk dydaktyk)
+        public ActionResult Edit([Bind(Include = "ID,Nazwisko,Imie,DataZatrudnienia,Lokalizacja")] Dydaktyk dydaktyk,string[] wybraneKursy)
+        
+            //public ActionResult Edit(Dydaktyk dydaktyk)
         {
             if (ModelState.IsValid)
             {
+                dydaktyk.Lokalizacja.DydaktykID = dydaktyk.ID;
+                if (!String.IsNullOrEmpty(dydaktyk.Lokalizacja.Miejsce))
+                {
+                    if (db.Lokalizacje.Any(l => l.DydaktykID == dydaktyk.ID))
+                    {
+                        db.Entry(dydaktyk.Lokalizacja).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.Lokalizacje.Add(dydaktyk.Lokalizacja);
+                    }
+                }
+
+                ZaktualizujKursyDydaktyka(wybraneKursy, dydaktyk);
+
                 db.Entry(dydaktyk).State = EntityState.Modified;
                 db.SaveChanges();
+                WpiszPrzydzieloneDaneKursu(dydaktyk);
                 return RedirectToAction("Index");
             }
             ViewBag.ID = new SelectList(db.Lokalizacje, "DydaktykID", "Miejsce", dydaktyk.ID);
             return View(dydaktyk);
+        }
+
+        private void ZaktualizujKursyDydaktyka(string[] wybraneKursy, Dydaktyk dydaktyk)
+        {
+            dydaktyk.Kursy = new List<Kurs>();
+            
+            foreach (int kursID in wybraneKursy.Select(s=>Convert.ToInt32(s)))
+            {
+                var item = db.Kursy.Single(k => k.KursID == Convert.ToInt32(kursID));
+                dydaktyk.Kursy.Add(item);
+            }
+         
+            
         }
 
         // GET: Dydaktyk/Delete/5
@@ -125,7 +183,7 @@ namespace RejestrSzkolen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dydaktyk dydaktyk = db.Dydaktycy.Find(id);
+            Dydaktyk dydaktyk = db.Dydaktycy.Include(d => d.Lokalizacja).FirstOrDefault(d => d.ID == id);
             if (dydaktyk == null)
             {
                 return HttpNotFound();

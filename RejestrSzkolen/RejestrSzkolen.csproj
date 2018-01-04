@@ -242,6 +242,22 @@
     <Compile Include="Migrations\201708011607504_ocena.Designer.cs">
       <DependentUpon>201708011607504_ocena.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708061440394_testdata.cs" />
+    <Compile Include="Migrations\201708061440394_testdata.Designer.cs">
+      <DependentUpon>201708061440394_testdata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708061518536_wlasciwosci.cs" />
+    <Compile Include="Migrations\201708061518536_wlasciwosci.Designer.cs">
+      <DependentUpon>201708061518536_wlasciwosci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708131245373_nazwy.cs" />
+    <Compile Include="Migrations\201708131245373_nazwy.Designer.cs">
+      <DependentUpon>201708131245373_nazwy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708131306469_dziedziczenie.cs" />
+    <Compile Include="Migrations\201708131306469_dziedziczenie.Designer.cs">
+      <DependentUpon>201708131306469_dziedziczenie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dydaktyk.cs" />
@@ -250,12 +266,14 @@
     <Compile Include="Models\Kurs.cs" />
     <Compile Include="Models\Lokalizacja.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Osoba.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Zapis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DydaktykVM.cs" />
     <Compile Include="ViewModels\IndexVM.cs" />
+    <Compile Include="ViewModels\PrzydzieloneDaneKursuVM.cs" />
     <Compile Include="ViewModels\Statystyki2VM.cs" />
     <Compile Include="ViewModels\StatystykiVM.cs" />
   </ItemGroup>
@@ -328,16 +346,14 @@
     <Content Include="Views\Kurs\Details.cshtml" />
     <Content Include="Views\Kurs\Edit.cshtml" />
     <Content Include="Views\Kurs\Index.cshtml" />
-    <Content Include="Views\Dydaktyks\Create.cshtml" />
-    <Content Include="Views\Dydaktyks\Delete.cshtml" />
-    <Content Include="Views\Dydaktyks\Details.cshtml" />
-    <Content Include="Views\Dydaktyks\Edit.cshtml" />
-    <Content Include="Views\Dydaktyks\Index.cshtml" />
     <Content Include="Views\Dydaktyk\Create.cshtml" />
     <Content Include="Views\Dydaktyk\Delete.cshtml" />
     <Content Include="Views\Dydaktyk\Details.cshtml" />
     <Content Include="Views\Dydaktyk\Edit.cshtml" />
     <Content Include="Views\Dydaktyk\Index.cshtml" />
+    <Content Include="Views\Dydaktyk\_IndexKursy.cshtml" />
+    <Content Include="Views\Dydaktyk\_IndexZapisy.cshtml" />
+    <Content Include="Views\Dydaktyk\_IndexDydaktycy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -378,6 +394,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708011607504_ocena.resx">
       <DependentUpon>201708011607504_ocena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708061440394_testdata.resx">
+      <DependentUpon>201708061440394_testdata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708061518536_wlasciwosci.resx">
+      <DependentUpon>201708061518536_wlasciwosci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708131245373_nazwy.resx">
+      <DependentUpon>201708131245373_nazwy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708131306469_dziedziczenie.resx">
+      <DependentUpon>201708131306469_dziedziczenie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

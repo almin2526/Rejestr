@@ -1,0 +1,24 @@
+﻿@model RejestrSzkolen.ViewModels.DydaktykVM
+@if (Model.Zapisy != null)
+{
+    <h3>
+        Studenci zapisani na poszczególne kursy
+    </h3>
+        <table class="table">
+            <tr>
+                <th>Nazwa</th>
+                <th>Ocena</th>
+            </tr>
+            @foreach (var item in Model.Zapisy)
+            {
+                <tr>
+                    <td>
+                        @item.Student.Nazwisko
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ocena)
+                    </td>
+                </tr>
+            }
+        </table>
+}
