@@ -23,7 +23,7 @@ namespace RejestrSzkolen.Controllers
             return View(vm);
         }
 
-      
+       
 
         // GET: Students/Details/5
         public ActionResult Details(int? id)

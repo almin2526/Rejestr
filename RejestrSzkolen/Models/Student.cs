@@ -7,9 +7,8 @@ using System.Web;
 
 namespace RejestrSzkolen.Models
 {
-    public class Student:Osoba
-    {
-       
+    public class Student : Osoba
+    {       
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data rejestracji", Prompt = "Podaj datę rejestracji", Description = "Data rejestracji studenta")]

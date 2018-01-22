@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RejestrSzkolen.Models.Kurs>
+
+@{
+    ViewBag.Title = "Kursy";
+}
+
+<h2>Kursy na które można jeszcze zapisać studenta</h2>
+
+ 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jednostka.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Punkty)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jednostka.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Punkty)
+        </td>
+        <td>            
+            <a href='@Url.Action("Create", "Zapis",  new { KursID=item.KursID, StudentID = ViewBag.ID })' class="btn btn-default">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

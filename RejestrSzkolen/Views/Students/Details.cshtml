@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Zapisy studenta</h2>
 
 <div>
     <h4>Student</h4>
@@ -41,30 +41,44 @@
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Zapisy)
-        </dt>
-        <dd>
-            <table class="table ">
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Kurs.Tytul)</th>
-                    <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Ocena)</th>
-                </tr>
-                @foreach (var item in Model.Zapisy)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem =>item.Kurs.Tytul)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ocena)
-                        </td>
-                    </tr>
-                }
-            </table>
-        </dd>
-        
+       
     </dl>
+    <div class="alert alert-success">
+
+        @Html.DisplayNameFor(model => model.Zapisy)
+
+        <a href='@Url.Action("Index","Zapis", new { ID= Model.ID })' class="btn btn-default">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+
+        </a>
+        <table class="table ">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Kurs.Tytul)</th>
+                <th>@Html.DisplayNameFor(model => model.Zapisy.FirstOrDefault().Ocena)</th>
+            </tr>
+            @foreach (var item in Model.Zapisy)
+            {
+                <tr>
+
+                    <td>
+                        <a href='@Url.Action("Delete", "Zapis", new { ID= item.ZapisID })' class="btn btn-default">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </a>
+                        @Html.DisplayFor(modelItem => item.Kurs.Tytul)
+                    </td>
+                    <td>
+                        <a href='@Url.Action("Edit", "Zapis", new { ID= item.ZapisID })' class="btn btn-default">
+                            <span class="glyphicon glyphicon-check"></span>
+                        </a>
+                        @Html.DisplayFor(modelItem => item.Ocena)
+                    </td>
+                    
+                </tr>
+            }
+        </table>
+
+    </div>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

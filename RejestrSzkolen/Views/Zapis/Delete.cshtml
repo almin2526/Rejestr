@@ -1,0 +1,48 @@
+﻿@model RejestrSzkolen.Models.Zapis
+
+@{
+    ViewBag.Title = "Usuwanie zapisu";
+}
+
+<h2>Usunięcie kursy z zapisów studenta</h2>
+
+<h3>Czy jestes pewien?</h3>
+<div>
+    <h4>Zapis</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kurs.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kurs.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ocena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ocena)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model=>model.ZapisID)
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do studenta", "Details","Students", new { id=Model.StudentID })
+        </div>
+    }
+</div>

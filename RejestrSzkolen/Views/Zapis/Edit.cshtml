@@ -1,0 +1,27 @@
+﻿@model IEnumerable<String>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Oceń</h2>
+ 
+<table class="table">
+    <tr>
+        <th>Ocena</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item)
+        </td>
+
+        <td>
+            @Html.ActionLink("Wybierz", "EditPost", new { Ocena=item, ZapisID=ViewBag.ID }) 
+        </td>
+    </tr>
+}
+
+</table>

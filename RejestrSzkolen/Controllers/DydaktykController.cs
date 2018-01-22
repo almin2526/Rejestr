@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using RejestrSzkolen.DAL;
 using RejestrSzkolen.Models;
 using RejestrSzkolen.ViewModels;
+using System.Data.Entity.Validation;
 
 namespace RejestrSzkolen.Controllers
 {
@@ -137,26 +138,48 @@ namespace RejestrSzkolen.Controllers
         
             //public ActionResult Edit(Dydaktyk dydaktyk)
         {
+            db.Database.Log = s => System.Diagnostics.Debug.Write(s);
             if (ModelState.IsValid)
             {
-                dydaktyk.Lokalizacja.DydaktykID = dydaktyk.ID;
-                if (!String.IsNullOrEmpty(dydaktyk.Lokalizacja.Miejsce))
-                {
-                    if (db.Lokalizacje.Any(l => l.DydaktykID == dydaktyk.ID))
-                    {
-                        db.Entry(dydaktyk.Lokalizacja).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        db.Lokalizacje.Add(dydaktyk.Lokalizacja);
-                    }
-                }
+                //dydaktyk.Lokalizacja.DydaktykID = dydaktyk.ID;
+                //if (!String.IsNullOrEmpty(dydaktyk.Lokalizacja.Miejsce))
+                //{
+                //    if (db.Lokalizacje.Any(l => l.DydaktykID == dydaktyk.ID))
+                //    {
+                //        db.Entry(dydaktyk.Lokalizacja).State = EntityState.Modified;
+                //    }
+                //    else
+                //    {
+                //        db.Lokalizacje.Add(dydaktyk.Lokalizacja);
+                //    }
+                //}
 
                 ZaktualizujKursyDydaktyka(wybraneKursy, dydaktyk);
 
-                db.Entry(dydaktyk).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(dydaktyk).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
+             
+
                 WpiszPrzydzieloneDaneKursu(dydaktyk);
+
+             
                 return RedirectToAction("Index");
             }
             ViewBag.ID = new SelectList(db.Lokalizacje, "DydaktykID", "Miejsce", dydaktyk.ID);
@@ -166,11 +189,23 @@ namespace RejestrSzkolen.Controllers
         private void ZaktualizujKursyDydaktyka(string[] wybraneKursy, Dydaktyk dydaktyk)
         {
             dydaktyk.Kursy = new List<Kurs>();
-            
-            foreach (int kursID in wybraneKursy.Select(s=>Convert.ToInt32(s)))
+
+            Dydaktyk dydaktyk2 = db.Dydaktycy.Include(d => d.Lokalizacja).FirstOrDefault(d => d.ID == dydaktyk.ID);       
+            dydaktyk2.Kursy.Clear();
+            dydaktyk2.Imie = dydaktyk.Imie;
+            dydaktyk2.Nazwisko = dydaktyk.Nazwisko;
+            dydaktyk2.Lokalizacja = dydaktyk.Lokalizacja;
+
+
+            if (wybraneKursy != null)
             {
-                var item = db.Kursy.Single(k => k.KursID == Convert.ToInt32(kursID));
-                dydaktyk.Kursy.Add(item);
+                foreach (int kursID in wybraneKursy.Select(s => Convert.ToInt32(s)))
+                {
+                    var item = db.Kursy.Single(k => k.KursID == kursID);
+                    //item.Dydaktycy.Add(dydaktyk2);
+                    //db.Entry(item).State = EntityState.Modified;
+                    dydaktyk2.Kursy.Add(item);                     
+                }
             }
          
             

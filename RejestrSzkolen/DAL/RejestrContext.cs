@@ -25,5 +25,7 @@ namespace RejestrSzkolen.DAL
         }
 
         public System.Data.Entity.DbSet<RejestrSzkolen.Models.Lokalizacja> Lokalizacje { get; set; }
+
+        public System.Data.Entity.DbSet<RejestrSzkolen.Models.Osoba> Osobas { get; set; }
     }
 }

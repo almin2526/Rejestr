@@ -203,6 +203,7 @@
     <Compile Include="Controllers\KursController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\ZapisController.cs" />
     <Compile Include="DAL\InterceptorLogging.cs" />
     <Compile Include="DAL\NLogCommandInterceptor.cs" />
     <Compile Include="DAL\RejestrConfiguration.cs" />
@@ -257,6 +258,10 @@
     <Compile Include="Migrations\201708131306469_dziedziczenie.cs" />
     <Compile Include="Migrations\201708131306469_dziedziczenie.Designer.cs">
       <DependentUpon>201708131306469_dziedziczenie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801220852084_migracja.cs" />
+    <Compile Include="Migrations\201801220852084_migracja.Designer.cs">
+      <DependentUpon>201801220852084_migracja.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -354,6 +359,9 @@
     <Content Include="Views\Dydaktyk\_IndexKursy.cshtml" />
     <Content Include="Views\Dydaktyk\_IndexZapisy.cshtml" />
     <Content Include="Views\Dydaktyk\_IndexDydaktycy.cshtml" />
+    <Content Include="Views\Zapis\Index.cshtml" />
+    <Content Include="Views\Zapis\Delete.cshtml" />
+    <Content Include="Views\Zapis\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -406,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708131306469_dziedziczenie.resx">
       <DependentUpon>201708131306469_dziedziczenie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801220852084_migracja.resx">
+      <DependentUpon>201801220852084_migracja.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

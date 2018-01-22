@@ -48,9 +48,9 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.ActionLink("Edycja", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Usuń", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edycja", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Zapisy", "Details", new { id = item.ID },new { @class="btn btn-info" }) 
+                @Html.ActionLink("Usuń", "Delete", new { id = item.ID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace RejestrSzkolen.Models
 {
-    public class Dydaktyk:Osoba
+    public class Dydaktyk : Osoba
     {
        
         [DataType(DataType.Date)]
