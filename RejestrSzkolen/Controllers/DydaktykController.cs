@@ -232,7 +232,13 @@ namespace RejestrSzkolen.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Dydaktyk dydaktyk = db.Dydaktycy.Find(id);
+            //dydaktyk.Lokalizacja = null;
+            var lok = db.Lokalizacje.FirstOrDefault(f => f.DydaktykID == id);
+            db.Lokalizacje.Remove(lok);
+
+            
             db.Dydaktycy.Remove(dydaktyk);
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }

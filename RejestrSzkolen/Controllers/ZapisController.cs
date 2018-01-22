@@ -45,6 +45,8 @@ namespace RejestrSzkolen.Controllers
             ViewBag.ID = id;
             return View(list);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditPost(string ocena, int ZapisID)
         {
             try

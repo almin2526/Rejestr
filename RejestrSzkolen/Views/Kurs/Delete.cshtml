@@ -4,15 +4,16 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Usuwanie</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
+<h3>Czy jesteś pewie aby usunać kurs?</h3>
+
+<div class="alert alert-warning">
     <h4>Kurs</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Jednostka.Nazwa)
+            Jednostka
         </dt>
 
         <dd>
@@ -39,10 +40,12 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+        <div class="alert alert-danger">
+            <h4 class="danger">Wszystkie zapisy na kurs zostaną  także usunięte</h4>
+        </div>
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Usuń" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót", "Index")
         </div>
     }
 </div>

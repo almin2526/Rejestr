@@ -2,25 +2,27 @@
 
 @{
     ViewBag.Title = "Kursy";
+    int StudentID = ViewBag.ID;
 }
 
 <h2>Kursy na które można jeszcze zapisać studenta</h2>
 
  
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Jednostka.Nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tytul)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Punkty)
-        </th>
-        <th></th>
-    </tr>
-
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Jednostka.Nazwa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tytul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Punkty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -33,10 +35,21 @@
             @Html.DisplayFor(modelItem => item.Punkty)
         </td>
         <td>            
-            <a href='@Url.Action("Create", "Zapis",  new { KursID=item.KursID, StudentID = ViewBag.ID })' class="btn btn-default">
+            @*<a href='@Url.Action("Create", "Zapis",  new { KursID=item.KursID, StudentID = ViewBag.ID })' class="btn btn-default">
                 <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>*@
+            @using (Html.BeginForm("Create", "Zapis"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("KursID", item.KursID)
+                @Html.Hidden("StudentID", StudentID)
+                <div class="form-actions no-color">
+                    <button type="submit" class="btn btn-default" >
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </div>
+            }
 
-            </a>
         </td>
     </tr>
 }

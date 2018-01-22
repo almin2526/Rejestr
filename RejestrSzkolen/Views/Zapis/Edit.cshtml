@@ -2,26 +2,38 @@
 
 @{
     ViewBag.Title = "Edit";
+    int ZapisID = ViewBag.ID;
 }
 
 <h2>Oceń</h2>
- 
-<table class="table">
-    <tr>
-        <th>Ocena</th>
-        <th></th>
-    </tr>
+ <div class="alert alert-success">
+    <table class="table">
+        <tr>
+            <th>Ocena</th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item)
-        </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
 
-        <td>
-            @Html.ActionLink("Wybierz", "EditPost", new { Ocena=item, ZapisID=ViewBag.ID }) 
-        </td>
-    </tr>
-}
+                <td>
+                    @using (Html.BeginForm("EditPost", "Zapis"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("Ocena", item)
+                        @Html.Hidden("ZapisID", ZapisID)
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Ok" class="btn btn-default" />
+                        </div>
+                    }
 
-</table>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

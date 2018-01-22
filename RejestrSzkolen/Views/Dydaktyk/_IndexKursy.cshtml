@@ -8,7 +8,7 @@
             <th></th>
             <th>Numer</th>
             <th>Tytuł</th>
-            <th>Jednostka</th>
+   
         </tr>
 
         @foreach (var item in Model.Kursy)
@@ -26,15 +26,15 @@
                 <td>
                     @item.Tytul
                 </td>
-                <td>
+                @*<td>
                     @if (item.Jednostka != null)
                     {
                         @item.Jednostka.Nazwa
                     }
-                </td>
-                <td>
+                </td>*@
+                @*<td>
                     @Html.ActionLink("Wybierz", "Index", new { kursId = item.KursID })
-                </td>
+                </td>*@
             </tr>
         }
 

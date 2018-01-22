@@ -7,7 +7,7 @@
 <h2>Usunięcie kursy z zapisów studenta</h2>
 
 <h3>Czy jestes pewien?</h3>
-<div>
+<div class="alert alert-danger">
     <h4>Zapis</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -42,7 +42,7 @@
         @Html.HiddenFor(model=>model.ZapisID)
         <div class="form-actions no-color">
             <input type="submit" value="Usuń" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót do studenta", "Details","Students", new { id=Model.StudentID })
+            @Html.ActionLink("Powrót do studenta", "Details","Students", new { id=Model.StudentID },null)
         </div>
     }
 </div>

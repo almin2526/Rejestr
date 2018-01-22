@@ -6,11 +6,13 @@
 
 <h2>Dydaktycy</h2>
 
-<p>
-    @Html.ActionLink("Dodaj", "Create")
-</p>
+<div class="alert alert-info">
+    <p>
+        @Html.ActionLink("Dodaj", "Create")
+    </p>
 
 
-@Html.Partial("_IndexDydaktycy")
-@Html.Partial("_IndexKursy")
-@Html.Partial("_IndexZapisy")
+    @Html.Partial("_IndexDydaktycy")
+    @Html.Partial("_IndexKursy")
+    @*@Html.Partial("_IndexZapisy")*@
+</div>
