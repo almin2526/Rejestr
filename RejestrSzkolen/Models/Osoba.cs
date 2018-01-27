@@ -24,7 +24,5 @@ namespace RejestrSzkolen.Models
         {
             get { return Nazwisko + ", " + Imie; }
         }
-
-
     }
 }

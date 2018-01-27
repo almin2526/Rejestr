@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RejestrSzkolen.Models.Dydaktyk">
+    <Position X="0.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAEAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\Dydaktyk.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Lokalizacja" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Kursy" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Kurs">
+    <Position X="3.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAQQBAAAAAAAAAAgAAAAgAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\Kurs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Jednostka" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Zapisy" />
+      <Property Name="Dydaktycy" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Student">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Student.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Zapisy" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Zapis">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAICAAAQAAAAAAAAAAAAAAAAAIAAAAAQAAAAAACAAA=</HashCode>
+      <FileName>Models\Zapis.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Ocena" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Lokalizacja">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\Lokalizacja.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Jednostka">
+    <Position X="4.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAIAAAAEAAEAAAAAAAAgAAAAgAA=</HashCode>
+      <FileName>Models\Jednostka.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RejestrSzkolen.Models.Osoba">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAIAAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Osoba.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RejestrSzkolen.Models.Ocena">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAIAAAAAAAEAAAAgAAAAAAAgAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\Zapis.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
